@@ -6,9 +6,6 @@ namespace Cucumber.Cannery.Infrastructure.Markdown
 {
     public interface IMarkdownRenderer
     {
-        public StringBuilder Perform(
-            SpecFlowAssembly assembly,
-            TestExecution execution
-        );
+        public StringBuilder Perform(SpecFlowAssembly assembly);
     }
 }

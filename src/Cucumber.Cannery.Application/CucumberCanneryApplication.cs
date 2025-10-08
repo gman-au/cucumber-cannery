@@ -4,7 +4,6 @@ using Cucumber.Cannery.Infrastructure.AssemblyLoad;
 using Cucumber.Cannery.Infrastructure.Io;
 using Cucumber.Cannery.Infrastructure.Markdown;
 using Cucumber.Cannery.Infrastructure.Parsing.Arguments;
-using Cucumber.Cannery.Infrastructure.Parsing.Results;
 
 namespace Cucumber.Cannery.Application
 {
@@ -13,7 +12,6 @@ namespace Cucumber.Cannery.Application
         private readonly ILogger<CucumberCanneryApplication> _logger;
         private readonly IProgramArgumentsParser _programArgumentsParser;
         private readonly IAssemblyScanner _assemblyScanner;
-        private readonly ITestExecutionParser _testExecutionParser;
         private readonly IMarkdownRenderer _markdownRenderer;
         private readonly IFileWriter _fileWriter;
 
@@ -21,15 +19,13 @@ namespace Cucumber.Cannery.Application
             ILogger<CucumberCanneryApplication> logger,
             IProgramArgumentsParser programArgumentsParser, 
             IAssemblyScanner assemblyScanner,
-            ITestExecutionParser testExecutionParser, 
-            IMarkdownRenderer markdownRenderer, 
+            IMarkdownRenderer markdownRenderer,
             IFileWriter fileWriter
         )
         {
             _logger = logger;
             _programArgumentsParser = programArgumentsParser;
             _assemblyScanner = assemblyScanner;
-            _testExecutionParser = testExecutionParser;
             _markdownRenderer = markdownRenderer;
             _fileWriter = fileWriter;
         }
@@ -49,15 +45,10 @@ namespace Cucumber.Cannery.Application
                     _assemblyScanner
                         .Perform(arguments);
 
-                var testResults =
-                    _testExecutionParser
-                        .Parse(arguments);
-                
                 var markdown =
                     _markdownRenderer
                         .Perform(
-                            specFlowAssembly,
-                            testResults
+                            specFlowAssembly
                         );
                 
                 _fileWriter

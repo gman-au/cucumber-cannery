@@ -10,7 +10,6 @@ using Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Step;
 using Cucumber.Cannery.Infrastructure.Io;
 using Cucumber.Cannery.Infrastructure.Markdown;
 using Cucumber.Cannery.Infrastructure.Parsing.Arguments;
-using Cucumber.Cannery.Infrastructure.Parsing.Results;
 
 namespace Cucumber.Cannery.Tool
 {
@@ -33,7 +32,6 @@ namespace Cucumber.Cannery.Tool
                 .AddSingleton<IFileFinder, FileFinder>()
                 .AddSingleton<IMarkdownRenderer, MarkdownRenderer>()
                 .AddSingleton<IColourSorter, ColourSorter>()
-                .AddSingleton<ITestExecutionParser, JsonTestExecutionParser>()
                 .AddSingleton<IProgramArgumentsParser, ProgramArgumentsParser>();
 
             services

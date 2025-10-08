@@ -15,15 +15,12 @@ namespace Cucumber.Cannery.Infrastructure.Markdown
             _colourSorter = colourSorter;
         }
 
-        public StringBuilder Perform(
-            SpecFlowAssembly assembly,
-            TestExecution execution
-        )
+        public StringBuilder Perform(SpecFlowAssembly assembly)
         {
             var result = new StringBuilder();
             var headerBuilder = new StringBuilder();
 
-            var featureSummary =
+            /*var featureSummary =
                 ResultSummariser
                     .SummariseAllFeatures(execution);
 
@@ -129,7 +126,7 @@ namespace Cucumber.Cannery.Infrastructure.Markdown
             result
                 .Append(headerBuilder)
                 .Append(tocBuilder)
-                .Append(contentBuilder);
+                .Append(contentBuilder);*/
 
             return 
                 result;

@@ -21,7 +21,7 @@ namespace Cucumber.Cannery.Tool
             var services = new ServiceCollection();
 
             services
-                .AddSingleton<ISpecFlowApplication, SpecFlowApplication>()
+                .AddSingleton<ICucumberCanneryApplication, CucumberCanneryApplication>()
                 .AddSingleton<IAssemblyScanner, AssemblyScanner>()
                 .AddSingleton<IFeatureExtractor, FeatureExtractor>()
                 .AddSingleton<IScenarioArgumentBuilder, ScenarioArgumentBuilder>()

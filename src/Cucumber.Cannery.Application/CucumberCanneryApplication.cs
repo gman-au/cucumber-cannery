@@ -8,17 +8,17 @@ using Cucumber.Cannery.Infrastructure.Parsing.Results;
 
 namespace Cucumber.Cannery.Application
 {
-    public class SpecFlowApplication : ISpecFlowApplication
+    public class CucumberCanneryApplication : ICucumberCanneryApplication
     {
-        private readonly ILogger<SpecFlowApplication> _logger;
+        private readonly ILogger<CucumberCanneryApplication> _logger;
         private readonly IProgramArgumentsParser _programArgumentsParser;
         private readonly IAssemblyScanner _assemblyScanner;
         private readonly ITestExecutionParser _testExecutionParser;
         private readonly IMarkdownRenderer _markdownRenderer;
         private readonly IFileWriter _fileWriter;
 
-        public SpecFlowApplication(
-            ILogger<SpecFlowApplication> logger, 
+        public CucumberCanneryApplication(
+            ILogger<CucumberCanneryApplication> logger,
             IProgramArgumentsParser programArgumentsParser, 
             IAssemblyScanner assemblyScanner,
             ITestExecutionParser testExecutionParser, 

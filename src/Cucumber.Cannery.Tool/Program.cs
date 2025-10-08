@@ -12,7 +12,7 @@ var serviceProvider =
 
 var application = 
     serviceProvider
-        .GetRequiredService<ISpecFlowApplication>();
+        .GetRequiredService<ICucumberCanneryApplication>();
 
 application
     .Perform(args);

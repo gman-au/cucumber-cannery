@@ -1,6 +1,6 @@
 ﻿namespace Cucumber.Cannery.Application
 {
-    public interface ISpecFlowApplication
+    public interface ICucumberCanneryApplication
     {
         void Perform(string[] args);
     }

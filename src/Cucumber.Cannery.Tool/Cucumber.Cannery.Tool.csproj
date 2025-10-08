@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackAsTool>true</PackAsTool>
+        <PackageId>Gman.SpecFlowToMarkdown</PackageId>
+        <ToolCommandName>specflow-to-markdown</ToolCommandName>
+        <PackageOutputPath>./nupkg</PackageOutputPath>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Description>SpecFlow assembly and results parser, output to GitHub-compatible markdown</Description>
+        <RepositoryUrl>https://github.com/gman-au/specflow-to-markdown</RepositoryUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Cucumber.Cannery.Application\Cucumber.Cannery.Application.csproj" />
+        <ProjectReference Include="..\Cucumber.Cannery.Infrastructure.AssemblyLoad\Cucumber.Cannery.Infrastructure.AssemblyLoad.csproj" />
+        <ProjectReference Include="..\Cucumber.Cannery.Infrastructure.Io\Cucumber.Cannery.Infrastructure.Io.csproj" />
+        <ProjectReference Include="..\Cucumber.Cannery.Infrastructure.Markdown\Cucumber.Cannery.Infrastructure.Markdown.csproj" />
+        <ProjectReference Include="..\Cucumber.Cannery.Infrastructure.Parsing\Cucumber.Cannery.Infrastructure.Parsing.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="nupkg\" />
+    </ItemGroup>
+
+</Project>

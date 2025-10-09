@@ -27,5 +27,7 @@ namespace Cucumber.Cannery.Domain.TestAssembly
                 };
             }
         }
+
+        public override string ToString() => $"{Keyword} {StepName}";
     }
 }

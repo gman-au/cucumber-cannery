@@ -1,5 +1,9 @@
 # cucumber-cannery
 
+<p align="center">
+<img style="border-radius:10px;" alt="siren" width="300" src="https://github.com/user-attachments/assets/dbf9fa61-1fc9-47d2-a9e5-fc8c6bc54cdc" />
+</p>
+
 [![nuget](https://github.com/gman-au/cucumber-cannery/actions/workflows/nuget.yml/badge.svg)](https://github.com/gman-au/cucumber-cannery/actions/workflows/nuget.yml)
 
 ![GitHub Release](https://img.shields.io/github/v/release/gman-au/cucumber-cannery)

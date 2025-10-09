@@ -8,7 +8,7 @@
     <PropertyGroup>
         <PackAsTool>true</PackAsTool>
         <PackageId>Gman.Cucumber.Cannery</PackageId>
-        <ToolCommandName>cucumber-cannery</ToolCommandName>
+        <ToolCommandName>cucumber-can</ToolCommandName>
         <PackageOutputPath>./nupkg</PackageOutputPath>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>Documentation generator for cucumber / ReqnRoll libraries</Description>

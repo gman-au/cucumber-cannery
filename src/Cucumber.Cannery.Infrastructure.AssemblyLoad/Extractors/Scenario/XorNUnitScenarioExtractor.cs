@@ -21,7 +21,7 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Scenario
             Constants.XUnitTheoryAttribute
         };
 
-        private readonly ILogger<FeatureExtractor> _logger;
+        private readonly ILogger<DefinitionExtractor> _logger;
         private readonly IScenarioArgumentBuilder _scenarioArgumentBuilder;
         private readonly IStepExtractor _stepExtractor;
         private readonly IBuildConfiguration _buildConfiguration;
@@ -33,7 +33,7 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Scenario
         };
 
         public XorNUnitScenarioExtractor(
-            ILogger<FeatureExtractor> logger,
+            ILogger<DefinitionExtractor> logger,
             IStepExtractor stepExtractor,
             IScenarioArgumentBuilder scenarioArgumentBuilder, 
             IBuildConfiguration buildConfiguration

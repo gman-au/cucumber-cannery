@@ -5,6 +5,6 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad
 {
     public interface IAssemblyScanner
     {
-        public SpecFlowAssembly Perform(ProgramArguments arguments);
+        public ReqnRollAssembly Perform(ProgramArguments arguments);
     }
 }

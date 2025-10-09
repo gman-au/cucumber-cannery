@@ -8,19 +8,19 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad
 {
     public class AssemblyScanner : IAssemblyScanner
     {
-        private readonly IFeatureExtractor _featureExtractor;
+        private readonly IDefinitionExtractor _definitionExtractor;
         private readonly IFileFinder _fileFinder;
 
         public AssemblyScanner(
-            IFeatureExtractor featureExtractor,
+            IDefinitionExtractor definitionExtractor,
             IFileFinder fileFinder
         )
         {
-            _featureExtractor = featureExtractor;
+            _definitionExtractor = definitionExtractor;
             _fileFinder = fileFinder;
         }
 
-        public SpecFlowAssembly Perform(ProgramArguments arguments)
+        public ReqnRollAssembly Perform(ProgramArguments arguments)
         {
             var foundFilePath =
                 _fileFinder
@@ -34,7 +34,7 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad
                     .ReadAssembly(foundFilePath);
 
             var result =
-                _featureExtractor
+                _definitionExtractor
                     .Perform(assembly);
 
             return result;

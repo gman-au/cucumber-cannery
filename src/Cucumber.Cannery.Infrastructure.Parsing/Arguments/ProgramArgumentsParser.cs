@@ -15,26 +15,18 @@ namespace Cucumber.Cannery.Infrastructure.Parsing.Arguments
 
         public ProgramArguments Parse(string[] args)
         {
-            if (args.Length < 5)
-                throw new Exception("Expected 5 arguments");
+            if (args.Length < 3)
+                throw new Exception("Expected 3 arguments");
 
             var testAssemblyFolder = args[0];
             var testAssemblyFile = args[1];
-            var testResultsFolder = args[2];
-            var testResultsFile = args[3];
-            var outputPath = args[4];
+            var outputPath = args[2];
 
             if (string.IsNullOrEmpty(testAssemblyFolder))
                 throw new Exception("Assembly path argument invalid");
 
             if (string.IsNullOrEmpty(testAssemblyFile))
                 throw new Exception("Assembly file argument invalid");
-
-            if (string.IsNullOrEmpty(testResultsFolder))
-                throw new Exception("Results path argument invalid");
-
-            if (string.IsNullOrEmpty(testResultsFile))
-                throw new Exception("Results file argument invalid");
 
             if (string.IsNullOrEmpty(outputPath))
                 throw new Exception("Output path argument invalid");
@@ -43,8 +35,6 @@ namespace Cucumber.Cannery.Infrastructure.Parsing.Arguments
             {
                 TestAssemblyFolder = testAssemblyFolder,
                 TestAssemblyFile = testAssemblyFile,
-                TestResultsFolder = testResultsFolder,
-                TestResultsFile = testResultsFile,
                 OutputFilePath = outputPath
             };
             

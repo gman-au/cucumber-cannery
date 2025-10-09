@@ -3,8 +3,8 @@ using Cucumber.Cannery.Domain.TestAssembly;
 
 namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Feature
 {
-    public interface IFeatureExtractor
+    public interface IDefinitionExtractor
     {
-        public SpecFlowAssembly Perform(AssemblyDefinition assembly);
+        public ReqnRollAssembly Perform(AssemblyDefinition assembly);
     }
 }

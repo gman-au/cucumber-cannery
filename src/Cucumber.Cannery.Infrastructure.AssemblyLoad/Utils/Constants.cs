@@ -2,6 +2,9 @@
 {
     internal static class Constants
     {
+        public const string ReqnRollBindingAttributeValue = "Reqnroll.BindingAttribute";
+        public const string ReqnRollGivenAttributeValue = "Reqnroll.GivenAttribute";
+
         public const string CustomFeatureAttributeValue = "TechTalk.SpecFlow";
         public const string FeatureSetupMethodName = "FeatureSetup";
         public const string FeatureInfoTypeName = "TechTalk.SpecFlow.FeatureInfo";

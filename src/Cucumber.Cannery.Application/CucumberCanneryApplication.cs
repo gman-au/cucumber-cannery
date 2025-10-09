@@ -41,14 +41,14 @@ namespace Cucumber.Cannery.Application
                     _programArgumentsParser
                         .Parse(args);
                 
-                var specFlowAssembly =
+                var reqnRollAssembly =
                     _assemblyScanner
                         .Perform(arguments);
 
                 var markdown =
                     _markdownRenderer
                         .Perform(
-                            specFlowAssembly
+                            reqnRollAssembly
                         );
                 
                 _fileWriter

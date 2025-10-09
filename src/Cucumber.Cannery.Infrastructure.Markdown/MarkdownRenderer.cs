@@ -15,7 +15,7 @@ namespace Cucumber.Cannery.Infrastructure.Markdown
             _colourSorter = colourSorter;
         }
 
-        public StringBuilder Perform(SpecFlowAssembly assembly)
+        public StringBuilder Perform(ReqnRollAssembly assembly)
         {
             var result = new StringBuilder();
             var headerBuilder = new StringBuilder();

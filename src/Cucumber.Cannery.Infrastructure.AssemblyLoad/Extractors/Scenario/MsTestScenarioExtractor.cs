@@ -17,7 +17,7 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Scenario
     {
         private const string ParameterDeclarationSplit = "Parameter\\:.*";
         private readonly IBuildConfiguration _buildConfiguration;
-        private readonly ILogger<FeatureExtractor> _logger;
+        private readonly ILogger<DefinitionExtractor> _logger;
         private readonly IScenarioArgumentBuilder _scenarioArgumentBuilder;
         private readonly IStepExtractor _stepExtractor;
 
@@ -27,7 +27,7 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Scenario
         };
 
         public MsTestScenarioExtractor(
-            ILogger<FeatureExtractor> logger,
+            ILogger<DefinitionExtractor> logger,
             IStepExtractor stepExtractor,
             IScenarioArgumentBuilder scenarioArgumentBuilder,
             IBuildConfiguration buildConfiguration

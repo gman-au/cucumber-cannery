@@ -41,50 +41,45 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Definition
             var bindingModules = new List<ReqnRollBindingType>();
 
             foreach (var module in assembly.Modules)
-            {
-                foreach (var type in module.Types)
+            foreach (var type in module.Types)
+                if (type.CustomAttributes
+                    .Any(o =>
+                        o
+                            .AttributeType.FullName == Constants.ReqnRollBindingAttributeValue
+                    )
+                   )
                 {
-                    if (type.CustomAttributes
-                        .Any(
-                            o =>
-                                o
-                                    .AttributeType.FullName == Constants.ReqnRollBindingAttributeValue
-                                )
-                        )
+                    _logger
+                        .LogInformation($"Found bound ReqnRoll class [{type.Name}] in assembly [{assemblyName}]");
+
+                    var bindingModule = new ReqnRollBindingType
                     {
-                        _logger
-                            .LogInformation($"Found bound ReqnRoll class [{type.Name}] in assembly [{assemblyName}]");
+                        BindingClassName = type.Name
+                    };
 
-                        var bindingModule = new ReqnRollBindingType
-                        {
-                            BindingClassName = type.Name
-                        };
+                    var stepDefinitions = new List<ReqnRollStepDefinition>();
 
-                        var stepDefinitions = new List<ReqnRollStepDefinition>();
+                    foreach (var method in type.Methods)
+                    {
+                        if (!_stepDefinitionExtractor.IsApplicable(method)) continue;
 
-                        foreach (var method in type.Methods)
-                        {
-                            if (!_stepDefinitionExtractor.IsApplicable(method)) continue;
+                        var stepDefinition =
+                            _stepDefinitionExtractor
+                                .Perform(
+                                    method,
+                                    type,
+                                    ref inferredBuildConfiguration
+                                );
 
-                            var stepDefinition =
-                                _stepDefinitionExtractor
-                                    .Perform(
-                                        method,
-                                        type,
-                                        ref inferredBuildConfiguration
-                                    );
-
-                            stepDefinitions
-                                .Add(stepDefinition);
-                        }
-
-                        bindingModule.Definitions = stepDefinitions;
-
-                        bindingModules
-                            .Add(bindingModule);
+                        stepDefinitions
+                            .Add(stepDefinition);
                     }
+
+                    bindingModule.Definitions = stepDefinitions;
+
+                    bindingModules
+                        .Add(bindingModule);
                 }
-            }
 
             result.BuildConfiguration = inferredBuildConfiguration;
             result.BindingTypes = bindingModules;

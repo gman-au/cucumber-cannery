@@ -12,6 +12,8 @@ namespace Cucumber.Cannery.Application
         private readonly ILogger<CucumberCanneryApplication> _logger;
         private readonly IProgramArgumentsParser _programArgumentsParser;
         private readonly IAssemblyScanner _assemblyScanner;
+        private readonly IDocumentationFileScanner _documentationFileScanner;
+        private readonly IHelpBinder _helpBinder;
         private readonly IMarkdownRenderer _markdownRenderer;
         private readonly IFileWriter _fileWriter;
 
@@ -19,15 +21,18 @@ namespace Cucumber.Cannery.Application
             ILogger<CucumberCanneryApplication> logger,
             IProgramArgumentsParser programArgumentsParser, 
             IAssemblyScanner assemblyScanner,
+            IDocumentationFileScanner documentationFileScanner,
             IMarkdownRenderer markdownRenderer,
-            IFileWriter fileWriter
-        )
+            IFileWriter fileWriter,
+            IHelpBinder helpBinder)
         {
             _logger = logger;
             _programArgumentsParser = programArgumentsParser;
             _assemblyScanner = assemblyScanner;
+            _documentationFileScanner = documentationFileScanner;
             _markdownRenderer = markdownRenderer;
             _fileWriter = fileWriter;
+            _helpBinder = helpBinder;
         }
 
         public void Perform(string[] args)
@@ -40,10 +45,20 @@ namespace Cucumber.Cannery.Application
                 var arguments =
                     _programArgumentsParser
                         .Parse(args);
-                
+
                 var reqnRollAssembly =
                     _assemblyScanner
                         .Perform(arguments);
+
+                var reqnRollDocumentation =
+                    _documentationFileScanner
+                        .Perform(arguments);
+
+                _helpBinder
+                    .Bind(
+                        reqnRollAssembly,
+                        reqnRollDocumentation
+                    );
 
                 var markdown =
                     _markdownRenderer

@@ -1,8 +1,8 @@
-﻿using Mono.Cecil;
-using Cucumber.Cannery.Domain;
+﻿using Cucumber.Cannery.Domain;
 using Cucumber.Cannery.Domain.TestAssembly;
 using Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Definition;
 using Cucumber.Cannery.Infrastructure.Io;
+using Mono.Cecil;
 
 namespace Cucumber.Cannery.Infrastructure.AssemblyLoad
 {

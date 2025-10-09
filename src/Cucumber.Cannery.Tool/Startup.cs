@@ -19,12 +19,13 @@ namespace Cucumber.Cannery.Tool
             services
                 .AddSingleton<ICucumberCanneryApplication, CucumberCanneryApplication>()
                 .AddSingleton<IAssemblyScanner, AssemblyScanner>()
+                .AddSingleton<IDocumentationFileScanner, DocumentationFileScanner>()
+                .AddSingleton<IHelpBinder, HelpBinder>()
                 .AddSingleton<IDefinitionExtractor, DefinitionExtractor>()
                 .AddSingleton<IStepDefinitionExtractor, StepDefinitionExtractor>()
                 .AddSingleton<IFileWriter, FileWriter>()
                 .AddSingleton<IFileFinder, FileFinder>()
                 .AddSingleton<IMarkdownRenderer, MarkdownRenderer>()
-                .AddSingleton<IColourSorter, ColourSorter>()
                 .AddSingleton<IProgramArgumentsParser, ProgramArgumentsParser>();
 
             services

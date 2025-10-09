@@ -68,7 +68,8 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.StepDefinition
 
             if (string.IsNullOrEmpty(stepNameText)) throw new Exception($"Could not find step description for [{methodName}]");
 
-            result.Description = stepNameText;
+            result.StepName = stepNameText;
+            result.MethodName = methodName;
 
             var methodParameters =
                 method

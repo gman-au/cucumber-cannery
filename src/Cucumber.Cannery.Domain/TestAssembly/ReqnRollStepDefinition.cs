@@ -6,7 +6,11 @@ namespace Cucumber.Cannery.Domain.TestAssembly
     {
         public string Keyword { get; set; }
 
-        public string Description { get; set; }
+        public string StepName { get; set; }
+
+        public string MethodName { get; set; }
+
+        public string Help { get; set; }
 
         public IEnumerable<ReqnRollStepParameter> Parameters { get; set; }
 

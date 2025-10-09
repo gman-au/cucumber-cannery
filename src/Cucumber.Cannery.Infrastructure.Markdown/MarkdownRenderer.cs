@@ -1,7 +1,5 @@
 ﻿using System.Text;
 using Cucumber.Cannery.Domain.TestAssembly;
-using Cucumber.Cannery.Infrastructure.Markdown.Renderer;
-using Cucumber.Cannery.Infrastructure.Markdown.Extensions;
 
 namespace Cucumber.Cannery.Infrastructure.Markdown
 {
@@ -16,7 +14,49 @@ namespace Cucumber.Cannery.Infrastructure.Markdown
 
         public StringBuilder Perform(ReqnRollAssembly assembly)
         {
-            var result = new StringBuilder();
+            var resultBuilder = new StringBuilder();
+
+            resultBuilder
+                .AppendLine("<table>");
+
+            foreach (var bindingType in assembly.BindingTypes)
+            {
+                resultBuilder
+                    .AppendLine("<tr>")
+                    .AppendLine("<td>");
+
+                resultBuilder
+                    .AppendLine("<h2>")
+                    .AppendLine(bindingType.BindingClassName)
+                    .AppendLine("</h2>");
+
+                resultBuilder
+                    .AppendLine("</td>")
+                    .AppendLine("</tr>");
+
+                foreach (var definition in bindingType.Definitions)
+                {
+                    resultBuilder
+                        .AppendLine("<tr>");
+
+                    resultBuilder
+                        .AppendLine("<td>")
+                        .AppendLine(definition.Keyword)
+                        .AppendLine("</td>");
+
+                    resultBuilder
+                        .AppendLine("<td>")
+                        .AppendLine(definition.Description)
+                        .AppendLine("</td>");
+
+                    resultBuilder
+                        .AppendLine("</tr>");
+                }
+            }
+
+            resultBuilder
+                .AppendLine("</table>");
+
             var headerBuilder = new StringBuilder();
 
             /*var featureSummary =
@@ -106,7 +146,7 @@ namespace Cucumber.Cannery.Infrastructure.Markdown
                 .AppendLine("<tr>");
 
             var contentBuilder = new StringBuilder();
-            
+
             foreach (var feature in assembly.Features)
             {
                 ComponentRenderer
@@ -127,8 +167,8 @@ namespace Cucumber.Cannery.Infrastructure.Markdown
                 .Append(tocBuilder)
                 .Append(contentBuilder);*/
 
-            return 
-                result;
+            return
+                resultBuilder;
         }
     }
 }

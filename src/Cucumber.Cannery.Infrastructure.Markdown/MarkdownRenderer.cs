@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Cucumber.Cannery.Domain.Result;
 using Cucumber.Cannery.Domain.TestAssembly;
 using Cucumber.Cannery.Infrastructure.Markdown.Renderer;
 using Cucumber.Cannery.Infrastructure.Markdown.Extensions;

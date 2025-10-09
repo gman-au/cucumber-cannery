@@ -8,6 +8,6 @@ namespace Cucumber.Cannery.Domain.TestAssembly
 
         public string BuildConfiguration { get; set; }
 
-        public IEnumerable<ReqnRollStepDefinition> Definitions { get; set; }
+        public IEnumerable<ReqnRollBindingType> BindingTypes { get; set; }
     }
 }

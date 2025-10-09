@@ -10,7 +10,9 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.StepDefinition
     public class StepDefinitionExtractor : IStepDefinitionExtractor
     {
         private static readonly string[] ApplicableAttributes = [
-            Constants.ReqnRollGivenAttributeValue
+            Constants.ReqnRollGivenAttributeValue,
+            Constants.ReqnRollWhenAttributeValue,
+            Constants.ReqnRollThenAttributeValue
         ];
 
         public bool IsApplicable(MethodDefinition method)

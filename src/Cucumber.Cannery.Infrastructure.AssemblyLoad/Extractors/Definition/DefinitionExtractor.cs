@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Cucumber.Cannery.Domain.TestAssembly;
+using Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.StepDefinition;
+using Cucumber.Cannery.Infrastructure.AssemblyLoad.Utils;
 using Microsoft.Extensions.Logging;
 using Mono.Cecil;
-using Cucumber.Cannery.Domain.TestAssembly;
-using Cucumber.Cannery.Infrastructure.AssemblyLoad.Utils;
-using Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.StepDefinition;
 
-namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Feature
+namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Definition
 {
     public class DefinitionExtractor : IDefinitionExtractor
     {
@@ -38,7 +38,7 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Feature
                 AssemblyName = assemblyName
             };
 
-            var stepDefinitions = new List<ReqnRollStepDefinition>();
+            var bindingModules = new List<ReqnRollBindingType>();
 
             foreach (var module in assembly.Modules)
             {
@@ -55,6 +55,13 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Feature
                         _logger
                             .LogInformation($"Found bound ReqnRoll class [{type.Name}] in assembly [{assemblyName}]");
 
+                        var bindingModule = new ReqnRollBindingType
+                        {
+                            BindingClassName = type.Name
+                        };
+
+                        var stepDefinitions = new List<ReqnRollStepDefinition>();
+
                         foreach (var method in type.Methods)
                         {
                             if (!_stepDefinitionExtractor.IsApplicable(method)) continue;
@@ -69,15 +76,18 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Feature
 
                             stepDefinitions
                                 .Add(stepDefinition);
-
                         }
+
+                        bindingModule.Definitions = stepDefinitions;
+
+                        bindingModules
+                            .Add(bindingModule);
                     }
                 }
             }
 
-            result.Definitions = stepDefinitions;
-
             result.BuildConfiguration = inferredBuildConfiguration;
+            result.BindingTypes = bindingModules;
 
             return result;
         }

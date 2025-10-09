@@ -2,11 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Cucumber.Cannery.Application;
 using Cucumber.Cannery.Infrastructure.AssemblyLoad;
-using Cucumber.Cannery.Infrastructure.AssemblyLoad.Configuration;
-using Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors;
-using Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Feature;
-using Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Scenario;
-using Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Step;
+using Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Definition;
 using Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.StepDefinition;
 using Cucumber.Cannery.Infrastructure.Io;
 using Cucumber.Cannery.Infrastructure.Markdown;
@@ -24,12 +20,7 @@ namespace Cucumber.Cannery.Tool
                 .AddSingleton<ICucumberCanneryApplication, CucumberCanneryApplication>()
                 .AddSingleton<IAssemblyScanner, AssemblyScanner>()
                 .AddSingleton<IDefinitionExtractor, DefinitionExtractor>()
-                .AddSingleton<IScenarioArgumentBuilder, ScenarioArgumentBuilder>()
-                .AddSingleton<IScenarioExtractor, XorNUnitScenarioExtractor>()
-                .AddSingleton<IScenarioExtractor, MsTestScenarioExtractor>()
                 .AddSingleton<IStepDefinitionExtractor, StepDefinitionExtractor>()
-                .AddSingleton<IBuildConfiguration, BuildConfiguration>()
-                .AddSingleton<IStepExtractor, StepExtractor>()
                 .AddSingleton<IFileWriter, FileWriter>()
                 .AddSingleton<IFileFinder, FileFinder>()
                 .AddSingleton<IMarkdownRenderer, MarkdownRenderer>()

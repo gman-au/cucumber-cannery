@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
+        <DebugType>Embedded</DebugType>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>false</IncludeSymbols>
+        <IncludeSource>false</IncludeSource>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <IncludeReferencedProjects>true</IncludeReferencedProjects>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Company>G-MAN Solutions</Company>
+        <Authors>Gabriel Palma</Authors>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>Gman.Cucumber.Cannery.AssemblyScanner</PackageId>
+        <PackageOutputPath>./nupkg</PackageOutputPath>
+        <Description>Assembly scanner for cucumber / ReqnRoll libraries</Description>
+        <RepositoryUrl>https://github.com/gman-au/cucumber-cannery</RepositoryUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Cucumber.Cannery.Infrastructure.AssemblyLoad\Cucumber.Cannery.Infrastructure.AssemblyLoad.csproj" PrivateAssets="All"/>
+        <ProjectReference Include="..\Cucumber.Cannery.Infrastructure.Io\Cucumber.Cannery.Infrastructure.Io.csproj" PrivateAssets="All"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.6" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.6" />
+    </ItemGroup>
+
+    <!-- Include referenced project outputs -->
+    <ItemGroup>
+        <None Include="$(OutputPath)Cucumber.Cannery.*.*.*.dll" Pack="true" PackagePath="lib\$(TargetFramework)"/>
+        <None Include="$(OutputPath)Cucumber.Cannery.*.*.dll" Pack="true" PackagePath="lib\$(TargetFramework)"/>
+        <None Include="$(OutputPath)Cucumber.Cannery.*.dll" Pack="true" PackagePath="lib\$(TargetFramework)"/>
+        <None Include="$(OutputPath)Cucumber.Cannery.*.*.*.pdb" Pack="true" PackagePath="lib\$(TargetFramework)"/>
+        <None Include="$(OutputPath)Cucumber.Cannery.*.*.pdb" Pack="true" PackagePath="lib\$(TargetFramework)"/>
+        <None Include="$(OutputPath)Cucumber.Cannery.*.pdb" Pack="true" PackagePath="lib\$(TargetFramework)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="$(OutputPath)Microsoft.Extensions.*.*.dll" Pack="true" PackagePath="lib\$(TargetFramework)"/>
+        <None Include="$(OutputPath)Microsoft.Extensions.*.dll" Pack="true" PackagePath="lib\$(TargetFramework)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="$(OutputPath)mono.cecil.core.dll" Pack="true" PackagePath="lib\$(TargetFramework)"/>
+    </ItemGroup>
+
+</Project>

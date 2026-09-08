@@ -15,71 +15,89 @@ namespace Cucumber.Cannery.Infrastructure.AssemblyLoad.Extractors.Definition
 
         public DefinitionExtractor(
             ILogger<DefinitionExtractor> logger,
-            IStepDefinitionExtractor stepDefinitionExtractor)
+            IStepDefinitionExtractor stepDefinitionExtractor
+        )
         {
             _logger = logger;
             _stepDefinitionExtractor = stepDefinitionExtractor;
         }
 
-        public ReqnRollAssembly Perform(AssemblyDefinition assembly)
+        public ReqnRollAssembly Perform(
+            AssemblyDefinition assembly
+        )
         {
-            var assemblyName =
+            var assemblyNameDefinition =
                 assembly
-                    .Name
                     .Name;
+
+            var assemblyName =
+                assemblyNameDefinition
+                    .Name;
+
+            var assemblyFullName =
+                assemblyNameDefinition
+                    .FullName;
+
+            var assemblyVersion =
+                assemblyNameDefinition
+                    .Version
+                    .ToString();
 
             var inferredBuildConfiguration = "Unknown";
 
             _logger
                 .LogInformation($"Assembly name: [{assemblyName}]");
 
-            var result = new ReqnRollAssembly
-            {
-                AssemblyName = assemblyName
-            };
+            var result =
+                new ReqnRollAssembly
+                {
+                    AssemblyName = assemblyName,
+                    AssemblyFullName = assemblyFullName,
+                    AssemblyVersion = assemblyVersion
+                };
 
             var bindingModules = new List<ReqnRollBindingType>();
 
             foreach (var module in assembly.Modules)
-            foreach (var type in module.Types)
-                if (type.CustomAttributes
-                    .Any(o =>
-                        o
-                            .AttributeType.FullName == Constants.ReqnRollBindingAttributeValue
-                    )
-                   )
-                {
-                    _logger
-                        .LogInformation($"Found bound ReqnRoll class [{type.Name}] in assembly [{assemblyName}]");
-
-                    var bindingModule = new ReqnRollBindingType
+                foreach (var type in module.Types)
+                    if (type.CustomAttributes
+                        .Any(o =>
+                            o
+                                .AttributeType.FullName == Constants.ReqnRollBindingAttributeValue
+                        )
+                       )
                     {
-                        BindingClassName = type.Name
-                    };
+                        _logger
+                            .LogInformation($"Found bound ReqnRoll class [{type.Name}] in assembly [{assemblyName}]");
 
-                    var stepDefinitions = new List<ReqnRollStepDefinition>();
+                        var bindingModule = new ReqnRollBindingType
+                        {
+                            BindingClassName = type.Name
+                        };
 
-                    foreach (var method in type.Methods)
-                    {
-                        if (!_stepDefinitionExtractor.IsApplicable(method)) continue;
+                        var stepDefinitions = new List<ReqnRollStepDefinition>();
 
-                        var stepDefinition =
-                            _stepDefinitionExtractor
-                                .Perform(
-                                    method,
-                                    type,
-                                    ref inferredBuildConfiguration
-                                );
+                        foreach (var method in type.Methods)
+                        {
+                            if (!_stepDefinitionExtractor.IsApplicable(method)) continue;
 
-                        stepDefinitions
-                            .Add(stepDefinition);
+                            var stepDefinition =
+                                _stepDefinitionExtractor
+                                    .Perform(
+                                        method,
+                                        type,
+                                        ref inferredBuildConfiguration
+                                    );
+
+                            stepDefinitions
+                                .Add(stepDefinition);
+                        }
+
+                        bindingModule.Definitions = stepDefinitions;
+
+                        bindingModules
+                            .Add(bindingModule);
                     }
-
-                    bindingModule.Definitions = stepDefinitions;
-
-                    bindingModules
-                        .Add(bindingModule);
-                }
 
             result.BuildConfiguration = inferredBuildConfiguration;
             result.BindingTypes = bindingModules;

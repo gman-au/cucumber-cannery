@@ -40,7 +40,7 @@ namespace Cucumber.Cannery.Application
             try
             {
                 _logger
-                    .LogInformation("Starting SpecFlow Markdown generation...");
+                    .LogInformation("Starting ReqnRoll Markdown generation...");
 
                 var arguments =
                     _programArgumentsParser
@@ -72,7 +72,7 @@ namespace Cucumber.Cannery.Application
                         arguments.OutputFilePath);
 
                 _logger
-                    .LogInformation("Completed SpecFlow Markdown generation");
+                    .LogInformation("Completed ReqnRoll Markdown generation");
             }
             catch (Exception ex)
             {
